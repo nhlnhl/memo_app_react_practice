@@ -1,26 +1,32 @@
 import React, { Component } from "react";
-import deleteButton from './delete.png';
+import deleteButtonImg from './delete.png';
 
 class Memo extends Component {
     static defaultProps = {
         info: {
+            id: 0,
             title: 'title',
             content: 'content'
-        }
+        },
+        onRemove: () => console.warn('onRemove method is not defined !')
     }
 
-    // TODO: handleDelete method
+    handleRemove = () => {
+        const { info, onRemove } = this.props;
+        onRemove(info.id);
+    }
 
     render() {
         const {
-            title, content
+            id, title, content
         } = this.props.info;
 
         return (
             <div>
+                <div>{id}</div>
                 <div><b>{title}</b></div>
                 <div>{content}</div>
-                <img src={deleteButton} />
+                <img name="deleteButton" alt="Button to delete this memo" src={deleteButtonImg} onClick={this.handleRemove} />
             </div>
         );
     }

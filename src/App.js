@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import logo from './logo.png';
 import './App.css';
-import Memos from './Memos';
-import createButton from "./create.png"
+import MemoList from './MemoList';
+import logoImg from './logo.png';
+import createButtonImg from './create.png';
 
 class App extends Component {
-    id = 0
-
     state = {
+        id: 0,
         title: '',
         content: '',
-        information: []
+        data: []
     }
 
     handleChange = (e) => {
@@ -19,18 +18,36 @@ class App extends Component {
         });
     }
 
-    handleCreate = (e) => {
-        const { information } = this.state;
+    handleCreate = () => {
+        const { id, data } = this.state;
 
         this.setState({
-            information: information.concat({ id: this.id++, title: this.state.title, content: this.state.content })
-        })
+            id: id + 1,
+            data: data.concat({ id: this.state.id, title: this.state.title, content: this.state.content })
+        });
+
+        this.handleInitialize();
+    }
+
+    handleInitialize = () => {
+        this.setState({
+            title: '',
+            content: ''
+        });
+    }
+
+    handleRemove = (id) => {
+        const { data } = this.state;
+
+        this.setState({
+            data: data.filter(info => info.id !== id)
+        });
     }
 
     render() {
         return (
             <div>
-                <img src={logo} />
+                <img name="logo" alt="Logo of the app" src={logoImg} />
                 <form>
                     <input
                         placeholder="title"
@@ -44,9 +61,9 @@ class App extends Component {
                         onChange={this.handleChange}
                         name="content"
                     />
-                    <img src={createButton} onClick={this.handleCreate} />
+                    <img name="createButton" alt="Button to create a new memo" src={createButtonImg} onClick={this.handleCreate} />
                 </form>
-                <Memos data={this.state.information} />
+                <MemoList data={this.state.data} onRemove={this.handleRemove} />
             </div>
         );
     }

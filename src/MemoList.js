@@ -15,7 +15,7 @@ class MemoList extends Component {
         );
 
         return (
-            <div>{list}</div>
+            <div id="memoList">{list}</div>
         );
     }
 }

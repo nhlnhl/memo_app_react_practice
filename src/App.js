@@ -47,21 +47,32 @@ class App extends Component {
     render() {
         return (
             <div>
-                <img name="logo" alt="Logo of the app" src={logoImg} />
+                <div id="logo">
+                    <img alt="Logo of the app" src={logoImg} />
+                    <h2>Memo App</h2>
+                    <h4>
+                        You can add or delete a memo here.<br/>
+                        The website was implemented in JavaScript using React.<br/>
+                        Feel free to test !
+                    </h4>
+                </div>
                 <form>
-                    <input
+                    <textarea
+                        id="title"
                         placeholder="title"
                         value={this.state.title}
                         onChange={this.handleChange}
                         name="title"
                     />
-                    <input
+                    <br/>
+                    <textarea
+                        id="content"
                         placeholder="content"
                         value={this.state.content}
                         onChange={this.handleChange}
                         name="content"
                     />
-                    <img name="createButton" alt="Button to create a new memo" src={createButtonImg} onClick={this.handleCreate} />
+                    <img id="createButton" alt="Button to create a new memo" src={createButtonImg} onClick={this.handleCreate} />
                 </form>
                 <MemoList data={this.state.data} onRemove={this.handleRemove} />
             </div>

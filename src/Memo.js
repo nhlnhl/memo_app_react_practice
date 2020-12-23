@@ -22,11 +22,10 @@ class Memo extends Component {
         } = this.props.info;
 
         return (
-            <div>
-                <div>{id}</div>
-                <div><b>{title}</b></div>
+            <div id="memo">
+                <div>{id}th memo: <b>{title}</b></div>
                 <div>{content}</div>
-                <img name="deleteButton" alt="Button to delete this memo" src={deleteButtonImg} onClick={this.handleRemove} />
+                <img id="deleteButton" alt="Button to delete this memo" src={deleteButtonImg} onClick={this.handleRemove} />
             </div>
         );
     }
